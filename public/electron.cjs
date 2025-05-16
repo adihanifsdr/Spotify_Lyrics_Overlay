@@ -14,7 +14,7 @@ function createWindow(height) {
     y: 0,
     transparent: true,
     alwaysOnTop: true,
-    frame: false,
+    frame: false, //if you have to log into spotify turn to true and restart program
     autoHideMenuBar: true,
     icon: path.join(__dirname, "icon.png"),
     webPreferences: {
