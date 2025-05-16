@@ -1,5 +1,8 @@
 const { app, BrowserWindow, screen, Tray, Menu } = require("electron");
 const path = require("node:path");
+require("dotenv").config(); // Load .env
+
+const port = process.env.VITE_PORT;
 // const { electronApp, optimizer } = require("@electron-toolkit/utils");
 
 let mainWindow;
@@ -14,7 +17,7 @@ function createWindow(height) {
     y: 0,
     transparent: true,
     alwaysOnTop: true,
-    frame: false, //if you have to log into spotify turn to true and restart program
+    frame: false, //if you have to log into spotify change to true and restart program
     autoHideMenuBar: true,
     icon: path.join(__dirname, "icon.png"),
     webPreferences: {
@@ -24,7 +27,7 @@ function createWindow(height) {
   });
 
   // Make window non-clickable (ignores all mouse events)
-  mainWindow.setIgnoreMouseEvents(true);
+  mainWindow.setIgnoreMouseEvents(true); //if you have to log into spotify turn to false and restart program
 
   mainWindow.setAlwaysOnTop(true, "screen-saver");
 
@@ -32,7 +35,7 @@ function createWindow(height) {
     mainWindow.show();
   });
 
-  mainWindow.loadURL("http://localhost:5173");
+  mainWindow.loadURL(`http://localhost:${port}`);
 }
 
 app.whenReady().then(() => {
