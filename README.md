@@ -3,10 +3,11 @@
 </p>
 
 <h1 align="center">Spotify Lyrics Overlay</h1>
-<p align="center"><strong>Live-synced Spotify lyrics overlay for desktop.</strong></p>
-
-![App demo](./demo.gif)
-
+<p align="center"><strong>Live-synced Spotify lyrics overlay for desktop.</strong>
+</p>
+<div align="center">
+<img src="./demo.gif" width="500" alt="App demo" />
+</div>
 <p align="center">
   <img src="https://img.shields.io/badge/status-beta-yellow" />
   <img src="https://img.shields.io/badge/license-MIT-green" />
