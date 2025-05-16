@@ -61,9 +61,8 @@ This project requires **Node.js** installed on your machine.
     - Open your browser and open _Developer Tools_ by clicking F12
     - Navigate to the _Network_ tab inside your _Developer Tools_ and filter using `Fetch/XHR`
     - Then visit https://open.spotify.com/ and make sure that you already logged in and pick any song with lyrics and open the lyrics view on spotify
-    - Spotify changed it so you have to click through the requests and look for `
-
-    https://spclient.wg.spotify.com/color-lyrics/v2` in the `Headers` section - In the `Request Headers` look for Authorization: Bearer - Copy the token after the word Bearer and add to VITE_BEARER_TOKEN
+    - Spotify changed it so you have to click through the requests and look for `https://spclient.wg.spotify.com/color-lyrics/v2` in the `Headers` section
+    - In the `Request Headers` look for Authorization: Bearer - Copy the token after the word Bearer and add to VITE_BEARER_TOKEN
 
     - Make sure the redirect URI is also added to your Spotify app settings
 
