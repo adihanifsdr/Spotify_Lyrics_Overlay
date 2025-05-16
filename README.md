@@ -41,31 +41,31 @@ This project requires **Node.js** installed on your machine.
     ```
 3.  **Set up your `.env` file**
 
-        Create a [Spotify Developer account](https://developer.spotify.com)
+    Create a [Spotify Developer account](https://developer.spotify.com)
 
-        Create a new project in the Spotify Developer Dashboard
+    Create a new project in the Spotify Developer Dashboard
 
-        Copy `.env.example` and rename it to .env
+    Copy `.env.example` and rename it to .env
 
-        In the `.env` file, set the following values:
+    In the `.env` file, set the following values:
 
-        ```bash
-        VITE_BEARER_TOKEN=fresh bearer token
-        VITE_SPOTIFY_CLIENT_ID=your_spotify_client_id
-        VITE_SPOTIFY_REDIRECT_URI=http://localhost:{your redirect port}
-        VITE_PORT={same port as redirect url}
-        ```
+    ```bash
+    VITE_BEARER_TOKEN=fresh bearer token
+    VITE_SPOTIFY_CLIENT_ID=your_spotify_client_id
+    VITE_SPOTIFY_REDIRECT_URI=http://localhost:{your redirect port}
+    VITE_PORT={same port as redirect url}
+    ```
 
-        **_How to get bearer token_**
+    **_How to get bearer token_**
 
-        - Open your browser and open _Developer Tools_ by clicking F12
-        - Navigate to the _Network_ tab inside your _Developer Tools_ and filter using `Fetch/XHR`
-        - Then visit https://open.spotify.com/ and make sure that you already logged in and pick any song with lyrics and open the lyrics view on spotify
-        - Spotify changed it so you have to click through the requests and look for `
+    - Open your browser and open _Developer Tools_ by clicking F12
+    - Navigate to the _Network_ tab inside your _Developer Tools_ and filter using `Fetch/XHR`
+    - Then visit https://open.spotify.com/ and make sure that you already logged in and pick any song with lyrics and open the lyrics view on spotify
+    - Spotify changed it so you have to click through the requests and look for `
 
     https://spclient.wg.spotify.com/color-lyrics/v2` in the `Headers` section - In the `Request Headers` look for Authorization: Bearer - Copy the token after the word Bearer and add to VITE_BEARER_TOKEN
 
-        - Make sure the redirect URI is also added to your Spotify app settings
+    - Make sure the redirect URI is also added to your Spotify app settings
 
 4.  **Start the app**
     ```bash
