@@ -1,8 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
+import type { SpotifyCurrentlyPlaying, LyricLine } from '../types/spotify'
 
-function LyricsDisplay({ songData, lyrics }) {
-  const lyricsRef = useRef(null)
-  const [currentLyricIndex, setCurrentLyricIndex] = useState(0)
+interface LyricsDisplayProps {
+  songData: SpotifyCurrentlyPlaying | null;
+  lyrics: LyricLine[] | null;
+}
+
+function LyricsDisplay({ songData, lyrics }: LyricsDisplayProps) {
+  const lyricsRef = useRef<HTMLDivElement>(null)
+  const [currentLyricIndex, setCurrentLyricIndex] = useState<number>(0)
 
   useEffect(() => {
     if (!lyrics || lyrics.length === 0 || !songData?.progress_ms) return
@@ -45,4 +51,5 @@ function LyricsDisplay({ songData, lyrics }) {
     </div>
   )
 }
-export { LyricsDisplay }
+
+export { LyricsDisplay } 

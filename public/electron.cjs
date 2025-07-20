@@ -7,6 +7,7 @@ const port = process.env.VITE_PORT;
 
 let mainWindow;
 let tray;
+let isLoginMode = false;
 
 function createWindow(height) {
   mainWindow = new BrowserWindow({
@@ -38,26 +39,37 @@ function createWindow(height) {
   mainWindow.loadURL(`http://localhost:${port}`);
 }
 
-app.whenReady().then(() => {
+function toggleLoginMode() {
+  isLoginMode = !isLoginMode;
+  
+  if (isLoginMode) {
+    // Enable login mode
+    mainWindow.setIgnoreMouseEvents(false);
+    mainWindow.setFrame(true);
+    mainWindow.setAlwaysOnTop(false);
+    mainWindow.center();
+    console.log("✅ Login mode enabled - window is now clickable");
+  } else {
+    // Disable login mode (back to overlay)
+    mainWindow.setIgnoreMouseEvents(true);
+    mainWindow.setFrame(false);
+    mainWindow.setAlwaysOnTop(true, "screen-saver");
+    console.log("✅ Overlay mode enabled - window is now transparent overlay");
+  }
+  
+  // Update the tray menu
+  updateTrayMenu();
+}
+
+function updateTrayMenu() {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-
-  //   // Set app user model id for Windows
-  //   electronApp.setAppUserModelId("com.electron");
-
-  //   // Watch for dev tools shortcuts
-  //   app.on("browser-window-created", (_, window) => {
-  //     optimizer.watchWindowShortcuts(window);
-  //   });
-
-  createWindow(height);
-
-  app.on("activate", function () {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  });
-
-  tray = new Tray(path.join(__dirname, "icon.png"));
-
+  
   const trayMenu = Menu.buildFromTemplate([
+    {
+      label: isLoginMode ? "✅ Login Mode (Clickable)" : "🔐 Enable Login Mode",
+      click: toggleLoginMode,
+    },
+    { type: "separator" },
     {
       label: "Vertical Layout",
       click: () => {
@@ -89,9 +101,33 @@ app.whenReady().then(() => {
     },
   ]);
 
-  tray.setToolTip("Lyrics Overlay");
   tray.setContextMenu(trayMenu);
+}
+
+app.whenReady().then(() => {
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+
+  //   // Set app user model id for Windows
+  //   electronApp.setAppUserModelId("com.electron");
+
+  //   // Watch for dev tools shortcuts
+  //   app.on("browser-window-created", (_, window) => {
+  //     optimizer.watchWindowShortcuts(window);
+  //   });
+
+  createWindow(height);
+
+  app.on("activate", function () {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
+
+  tray = new Tray(path.join(__dirname, "icon.png"));
+  tray.setToolTip("Lyrics Overlay");
+  
+  // Initialize the tray menu
+  updateTrayMenu();
 });
+
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
